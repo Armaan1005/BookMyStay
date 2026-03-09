@@ -1,44 +1,117 @@
 /**
  * =============================================================
- * MAIN CLASS - UseCase1HotelBookingApp
+ * MAIN CLASS - BookMyStay
  * =============================================================
  *
- * Use Case 1: Application Entry & Welcome Message
+ * Use Case 2: Basic Room Types & Static Availability
  *
  * Description:
- * This class represents the entry point of the
- * Hotel Booking Management System.
+ * This class demonstrates object modeling using abstraction
+ * and inheritance for different hotel room types.
  *
- * At this stage, the application:
- * - Starts execution from main() method
- * - Displays a welcome message to the user
- * - Confirms that the system has started successfully
- *
- * No business logic, data structures, or user input
- * is implemented in this use case.
- *
- * The goal is to establish a clear and predictable
- * application startup point.
+ * The application:
+ * - Creates room objects for different room categories
+ * - Stores room availability using simple variables
+ * - Displays room details and availability information
  *
  * @author Developer
- * @version 1.0
+ * @version 2.1
  */
 
 public class BookMyStay {
 
-    /**
-     * Application entry point.
-     *
-     * This method is the first method executed
-     * when the program is launched by the JVM.
-     *
-     * @param args Command-line arguments
-     */
-
     public static void main(String[] args) {
 
-        System.out.println("Welcome to the Hotel Booking Management System");
-        System.out.println("System initialized successfully.");
+        System.out.println("Welcome to the Book My Stay Hotel Booking System");
+        System.out.println("Displaying available room types...\n");
 
+        // Create room objects
+        Room single = new SingleRoom();
+        Room doubleRoom = new DoubleRoom();
+        Room suite = new SuiteRoom();
+
+        // Static availability variables
+        int singleAvailability = 10;
+        int doubleAvailability = 6;
+        int suiteAvailability = 3;
+
+        // Display room details
+        single.displayDetails();
+        System.out.println("Available Rooms: " + singleAvailability + "\n");
+
+        doubleRoom.displayDetails();
+        System.out.println("Available Rooms: " + doubleAvailability + "\n");
+
+        suite.displayDetails();
+        System.out.println("Available Rooms: " + suiteAvailability + "\n");
+
+        System.out.println("System initialized successfully.");
+    }
+}
+
+
+/**
+ * =============================================================
+ * ABSTRACT CLASS - Room
+ * =============================================================
+ *
+ * Represents a generic hotel room.
+ * Concrete room types must extend this class.
+ */
+abstract class Room {
+
+    protected int beds;
+    protected int size;
+    protected double price;
+
+    public Room(int beds, int size, double price) {
+        this.beds = beds;
+        this.size = size;
+        this.price = price;
+    }
+
+    public void displayDetails() {
+        System.out.println("Beds: " + beds);
+        System.out.println("Room Size: " + size + " sq ft");
+        System.out.println("Price per Night: $" + price);
+    }
+}
+
+
+/**
+ * =============================================================
+ * CLASS - SingleRoom
+ * =============================================================
+ */
+class SingleRoom extends Room {
+
+    public SingleRoom() {
+        super(1, 200, 100.0);
+    }
+}
+
+
+/**
+ * =============================================================
+ * CLASS - DoubleRoom
+ * =============================================================
+ */
+class DoubleRoom extends Room {
+
+    public DoubleRoom() {
+        super(2, 350, 180.0);
+    }
+}
+
+
+/**
+ * =============================================================
+ * CLASS - SuiteRoom
+ * =============================================================
+ */
+class SuiteRoom extends Room {
+
+    public SuiteRoom() {
+        super(3, 500, 350.0);
     }
 }
